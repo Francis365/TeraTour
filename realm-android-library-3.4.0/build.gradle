@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('realm-android-library-3.4.0.aar'))
