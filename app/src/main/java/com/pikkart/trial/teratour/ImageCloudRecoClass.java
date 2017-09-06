@@ -121,7 +121,7 @@ public class ImageCloudRecoClass extends AppCompatActivity implements IRecogniti
             @Override
             public void onClick(View view) {
                 if (cardView.isShown()){
-                    cardView.animate().translationY(0.0f).setDuration(5).setListener(new Animator.AnimatorListener() {
+                    cardView.animate().translationY(0.0f).setDuration(800).setListener(new Animator.AnimatorListener() {
                         @Override
                         public void onAnimationStart(Animator animator) {
 
@@ -145,7 +145,7 @@ public class ImageCloudRecoClass extends AppCompatActivity implements IRecogniti
 
                 }else{
 
-                    cardView.animate().translationY(30.0f).setDuration(5).setListener(new Animator.AnimatorListener() {
+                    cardView.animate().translationY(30.0f).setDuration(800).setListener(new Animator.AnimatorListener() {
                         @Override
                         public void onAnimationStart(Animator animator) {
                             cardView.setVisibility(View.VISIBLE);
