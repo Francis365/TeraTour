@@ -139,6 +139,7 @@ public class ImageCloudRecoClass extends AppCompatActivity implements IRecogniti
 
                         @Override
                         public void onAnimationRepeat(Animator animator) {
+
                         }
                     });
 
