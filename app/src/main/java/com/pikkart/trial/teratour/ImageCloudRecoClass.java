@@ -134,7 +134,7 @@ public class ImageCloudRecoClass extends AppCompatActivity implements IRecogniti
 
                         @Override
                         public void onAnimationCancel(Animator animator) {
-
+                            cardView.setVisibility(View.GONE);
                         }
 
                         @Override
