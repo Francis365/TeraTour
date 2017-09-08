@@ -120,52 +120,12 @@ public class ImageCloudRecoClass extends AppCompatActivity implements IRecogniti
         slideUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (cardView.isShown()){
-                    cardView.animate().translationY(0.0f).setDuration(800).setListener(new Animator.AnimatorListener() {
-                        @Override
-                        public void onAnimationStart(Animator animator) {
-
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animator animator) {
-                            cardView.setVisibility(View.GONE);
-                        }
-
-                        @Override
-                        public void onAnimationCancel(Animator animator) {
-
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animator) {
-
-                        }
-                    });
+                if (cardView.getVisibility() == View.VISIBLE){
+                    cardView.setVisibility(View.INVISIBLE);
 
                 }else{
 
-                    cardView.animate().translationY(30.0f).setDuration(800).setListener(new Animator.AnimatorListener() {
-                        @Override
-                        public void onAnimationStart(Animator animator) {
-                            cardView.setVisibility(View.VISIBLE);
-                        }
-
-                        @Override
-                        public void onAnimationEnd(Animator animator) {
-
-                        }
-
-                        @Override
-                        public void onAnimationCancel(Animator animator) {
-
-                        }
-
-                        @Override
-                        public void onAnimationRepeat(Animator animator) {
-
-                        }
-                    });
+                    cardView.setVisibility(View.VISIBLE);
                 }
 
             }
