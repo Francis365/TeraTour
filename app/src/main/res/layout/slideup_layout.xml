@@ -6,6 +6,6 @@
     android:layout_gravity="bottom"
     android:layout_alignParentBottom="true"
     android:layout_centerHorizontal="true"
-    android:background="@drawable/up_arrow">
+    android:background="@drawable/slide_sphere">
 
 </Button>

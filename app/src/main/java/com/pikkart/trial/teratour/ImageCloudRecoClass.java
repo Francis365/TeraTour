@@ -8,6 +8,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -96,6 +98,25 @@ public class ImageCloudRecoClass extends AppCompatActivity implements IRecogniti
         Button profilebutton = (Button) inflater.inflate(R.layout.profile_launcher, cameraTopLayer, false);
         cameraTopLayer.addView(profilebutton);
 
+        //assign profile launcher handler
+        profilebutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getBaseContext(), DashBoard.class));
+            }
+        });
+
+        //comment launcher view
+        Button commentButton = (Button) inflater.inflate(R.layout.comment_launcher, cameraTopLayer, false);
+        cameraTopLayer.addView(commentButton);
+
+        commentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getBaseContext(), CommentLayout.class));
+            }
+        });
+
         //like button view
         Button likeButton = (Button) inflater.inflate(R.layout.like_view, cameraTopLayer, false);
         cameraTopLayer.addView(likeButton);
@@ -122,10 +143,12 @@ public class ImageCloudRecoClass extends AppCompatActivity implements IRecogniti
             public void onClick(View view) {
                 if (cardView.getVisibility() == View.VISIBLE){
                     cardView.setVisibility(View.INVISIBLE);
+                    cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_down));
 
                 }else{
 
                     cardView.setVisibility(View.VISIBLE);
+                    cardView.startAnimation(AnimationUtils.loadAnimation(getApplicationContext(), R.anim.slide_up));
                 }
 
             }
@@ -134,11 +157,11 @@ public class ImageCloudRecoClass extends AppCompatActivity implements IRecogniti
 
 
         //menu layout view
-        DrawerLayout drawerLayout = (DrawerLayout) inflater.inflate(R.layout.menu, cameraTopLayer, false);
-        menuList = drawerLayout.findViewById(R.id.left_drawer);
+        NavigationView drawerLayout = (NavigationView) inflater.inflate(R.layout.menu, cameraTopLayer, false);
+        /*menuList = drawerLayout.findViewById(R.id.left_drawer);
         String[] testList = {"Profile", "Name"};
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, testList);
-        menuList.setAdapter(arrayAdapter);
+        menuList.setAdapter(arrayAdapter);*/
         cameraTopLayer.addView(drawerLayout);
 
         m_arView = new ARView(this);
@@ -147,21 +170,15 @@ public class ImageCloudRecoClass extends AppCompatActivity implements IRecogniti
         addContentView(cameraTopLayer, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         //addContentView(slidingLayout, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
 
-        //assign profile launcher handler
-        profilebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), DashBoard.class));
-            }
-        });
+
 
         //assign menu list handler
-        menuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*menuList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(ImageCloudRecoClass.this, "AR App in Progress " + i, Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
         /*FragmentManager fragmentManager = getSupportFragmentManager();
         MarkerDetailsDialogFragment markerDetailsDialogFragment = MarkerDetailsDialogFragment.newInstance("");
