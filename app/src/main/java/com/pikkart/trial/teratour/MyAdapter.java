@@ -102,11 +102,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
         public MyViewHolder(View itemView) {
             super(itemView);
-            cardImage = itemView.findViewById(R.id.card_image);
-            imageName = itemView.findViewById(R.id.card_text);
-            commentCount = itemView.findViewById(R.id.card_comment);
-            likes = itemView.findViewById(R.id.card_like);
-            shares = itemView.findViewById(R.id.card_share);
+            cardImage = (ImageView) itemView.findViewById(R.id.card_image);
+            imageName = (TextView) itemView.findViewById(R.id.card_text);
+            commentCount = (Button) itemView.findViewById(R.id.card_comment);
+            likes = (Button) itemView.findViewById(R.id.card_like);
+            shares = (Button) itemView.findViewById(R.id.card_share);
         }
 
         public void setData(MarkerModel current, int position) {

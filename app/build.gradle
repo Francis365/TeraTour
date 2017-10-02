@@ -2,12 +2,12 @@ apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 android {
     compileSdkVersion 26
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.pikkart.trial"
         minSdkVersion 16
-        targetSdkVersion 22
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
     }
@@ -24,8 +24,8 @@ dependencies {
     compile(name: 'pikkart_ar_sdk', ext: 'aar')
     /*compile project(':realm-android-library-3.4.0')*/
     compile 'com.writingminds:FFmpegAndroid:0.3.2'
-    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.brsanthu:migbase64:2.2'
+    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
     compile 'com.android.support:design:26.0.0-alpha1'
     compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
     compile 'com.android.support:cardview-v7:26.0.0-alpha1'

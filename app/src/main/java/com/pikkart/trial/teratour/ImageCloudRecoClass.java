@@ -1,8 +1,11 @@
 package com.pikkart.trial.teratour;
 
 import android.animation.Animator;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
@@ -14,6 +17,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -94,17 +98,21 @@ public class ImageCloudRecoClass extends AppCompatActivity implements IRecogniti
         RelativeLayout cameraTopLayer = new RelativeLayout(this);
         cameraTopLayer.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
 
-        //profile launcher view
-        Button profilebutton = (Button) inflater.inflate(R.layout.profile_launcher, cameraTopLayer, false);
-        cameraTopLayer.addView(profilebutton);
 
-        //assign profile launcher handler
-        profilebutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getBaseContext(), DashBoard.class));
-            }
-        });
+        //menu layout
+
+
+        /*NavigationView drawerLayout = (NavigationView) inflater.inflate(R.layout.menu, null);
+
+        cameraTopLayer.addView(drawerLayout);*/
+
+        /*menuList = drawerLayout.findViewById(R.id.left_drawer);
+        String[] testList = {"Profile", "Name"};
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, testList);
+        menuList.setAdapter(arrayAdapter);*/
+
+
+
 
         //comment launcher view
         Button commentButton = (Button) inflater.inflate(R.layout.comment_launcher, cameraTopLayer, false);
@@ -155,21 +163,37 @@ public class ImageCloudRecoClass extends AppCompatActivity implements IRecogniti
         });
 
 
+        //define navigation layout
 
-        //menu layout view
-        NavigationView drawerLayout = (NavigationView) inflater.inflate(R.layout.menu, cameraTopLayer, false);
-        /*menuList = drawerLayout.findViewById(R.id.left_drawer);
-        String[] testList = {"Profile", "Name"};
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, testList);
-        menuList.setAdapter(arrayAdapter);*/
-        cameraTopLayer.addView(drawerLayout);
+        NavigationView navigationView = new NavigationView(this);
+        navigationView.inflateHeaderView(R.layout.layout2);
+        navigationView.inflateMenu(R.menu.nav_menu);
+
+
+        NavigationView.LayoutParams navParams = new NavigationView.LayoutParams(
+                NavigationView.LayoutParams.WRAP_CONTENT,
+                NavigationView.LayoutParams.MATCH_PARENT
+        );
+        cameraTopLayer.addView(navigationView, navParams);
+
+
+        //define dashboard Button
+        Button dashButton = (Button) inflater.inflate(R.layout.profile_launcher, cameraTopLayer, false);
+        cameraTopLayer.addView(dashButton);
+
+            //assign dashButton handler
+            dashButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(getBaseContext(), DashBoard.class));
+                }
+            });
+
 
         m_arView = new ARView(this);
         m_arView.setOnTouchListener(this);
         addContentView(m_arView, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
         addContentView(cameraTopLayer, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
-        //addContentView(slidingLayout, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
-
 
 
         //assign menu list handler
@@ -183,6 +207,7 @@ public class ImageCloudRecoClass extends AppCompatActivity implements IRecogniti
         /*FragmentManager fragmentManager = getSupportFragmentManager();
         MarkerDetailsDialogFragment markerDetailsDialogFragment = MarkerDetailsDialogFragment.newInstance("");
         markerDetailsDialogFragment.show(fragmentManager, "fragment_2");*/
+
 
         RecognitionFragment _cameraFragment = ((RecognitionFragment) getFragmentManager().findFragmentById(R.id.pikkart_ar_fragment));
         _cameraFragment.startRecognition(new RecognitionOptions(
