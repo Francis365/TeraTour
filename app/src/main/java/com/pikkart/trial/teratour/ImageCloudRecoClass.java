@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -47,6 +48,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.zip.Inflater;
 
 /**
  * Created by root on 7/1/17.
@@ -98,6 +100,36 @@ public class ImageCloudRecoClass extends AppCompatActivity implements IRecogniti
         RelativeLayout cameraTopLayer = new RelativeLayout(this);
         cameraTopLayer.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
 
+
+        //define navigation layout
+
+
+        NavigationView navigationView = new NavigationView(this);
+        navigationView.inflateHeaderView(R.layout.layout2);
+        navigationView.inflateMenu(R.menu.nav_menu);
+
+
+        DrawerLayout.LayoutParams navParams = new DrawerLayout.LayoutParams(
+                DrawerLayout.LayoutParams.WRAP_CONTENT,
+                DrawerLayout.LayoutParams.MATCH_PARENT,
+                Gravity.START
+        );
+        //cameraTopLayer.addView(navigationView, navParams);
+
+        DrawerLayout drawerLayout = (DrawerLayout) inflater.inflate(R.layout.menu, cameraTopLayer, false);
+        drawerLayout.addView(navigationView, navParams);
+
+        cameraTopLayer.addView(drawerLayout);
+
+
+        Toolbar toolbar = new Toolbar(this);
+        Toolbar.LayoutParams tblayoutParams = new Toolbar.LayoutParams(
+                Toolbar.LayoutParams.MATCH_PARENT,
+                Toolbar.LayoutParams.WRAP_CONTENT
+        );
+        toolbar.setLayoutParams(tblayoutParams);
+
+        cameraTopLayer.addView(toolbar);
 
         //menu layout
 
@@ -163,18 +195,8 @@ public class ImageCloudRecoClass extends AppCompatActivity implements IRecogniti
         });
 
 
-        //define navigation layout
-
-        NavigationView navigationView = new NavigationView(this);
-        navigationView.inflateHeaderView(R.layout.layout2);
-        navigationView.inflateMenu(R.menu.nav_menu);
 
 
-        NavigationView.LayoutParams navParams = new NavigationView.LayoutParams(
-                NavigationView.LayoutParams.WRAP_CONTENT,
-                NavigationView.LayoutParams.MATCH_PARENT
-        );
-        cameraTopLayer.addView(navigationView, navParams);
 
 
         //define dashboard Button
@@ -192,6 +214,7 @@ public class ImageCloudRecoClass extends AppCompatActivity implements IRecogniti
 
         m_arView = new ARView(this);
         m_arView.setOnTouchListener(this);
+
         addContentView(m_arView, new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
         addContentView(cameraTopLayer, new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
 
