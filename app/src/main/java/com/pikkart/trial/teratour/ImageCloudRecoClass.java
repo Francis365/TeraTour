@@ -131,7 +131,7 @@ public class ImageCloudRecoClass extends AppCompatActivity implements IRecogniti
 
         cameraTopLayer.addView(toolbar);
 
-        //menu layoutjhbkj
+        //menu layout
 
 
         /*NavigationView drawerLayout = (NavigationView) inflater.inflate(R.layout.menu, null);
